@@ -12,10 +12,12 @@ import { HomePage } from "../pages/HomePage";
 import { KvkkPage } from "../pages/KvkkPage";
 import { ServiceDetailPage } from "../pages/ServiceDetailPage";
 import { ServicesPage } from "../pages/ServicesPage";
+import { ScrollToTop } from "./ScrollToTop";
 
 export function AppRouter() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route element={<PublicLayout />}>
           <Route path="/" element={<HomePage />} />

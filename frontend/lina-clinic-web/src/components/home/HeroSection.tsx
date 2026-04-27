@@ -14,9 +14,9 @@ import {
 import { Link as RouterLink } from "react-router-dom";
 
 const heroStats = [
-  { value: "15+", label: "Temel hizmet basligi" },
-  { value: "7/6", label: "Planli calisma duzeni" },
-  { value: "1", label: "Tek akista sade randevu deneyimi" },
+  { value: "15+", label: "Hizmet seçeneği" },
+  { value: "5", label: "Ana hizmet kategoriisi" },
+  { value: "Online", label: "Randevu talebi" },
 ];
 
 export function HeroSection() {
@@ -51,7 +51,7 @@ export function HeroSection() {
             <Grid item xs={12} lg={7}>
               <Chip
                 icon={<AutoAwesomeRoundedIcon />}
-                label="Modern tanitim ve randevu deneyimi"
+                label="Lina Güzellik Merkezi"
                 sx={{
                   mb: 2.5,
                   height: 34,
@@ -61,7 +61,7 @@ export function HeroSection() {
                 }}
               />
               <Typography variant="h1" sx={{ maxWidth: 760 }}>
-                Premium hissi sade bir cizgide sunan guzellik merkezi deneyimi
+                Cilt bakımı, lazer ve estetik uygulamalarda güven veren deneyim
               </Typography>
               <Typography
                 variant="h6"
@@ -73,9 +73,7 @@ export function HeroSection() {
                   lineHeight: 1.7,
                 }}
               >
-                Lina Clinic icin tasarlanan bu arayuz; hizmetleri sakin, zarif ve
-                guven veren bir anlatimla sunarken randevu surecini de kolaylastiran
-                modern bir temel hazirlar.
+                Lina Güzellik Merkezi; lazer uygulamaları, cilt bakımı, estetik uygulamalar, vücut şekillendirme ve saç uygulamaları alanlarında hizmet seçeneklerini anlaşılır şekilde sunar. Size uygun hizmeti inceleyebilir, müsait tarih ve saatler üzerinden kolayca randevu oluşturabilirsiniz.
               </Typography>
               <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ mt: 4 }}>
                 <Button
@@ -98,8 +96,8 @@ export function HeroSection() {
                 </Button>
               </Stack>
             </Grid>
-            <Grid item xs={12} lg={5}>
-              <Stack spacing={2.5}>
+            <Grid item xs={12} lg={5} sx={{ display: "flex", alignItems: "center" }}>
+              <Stack spacing={2.5} sx={{ width: "100%", maxWidth: 470, mx: "auto" }}>
                 <Paper
                   sx={{
                     p: 3,
@@ -108,15 +106,25 @@ export function HeroSection() {
                     backgroundColor: "rgba(255, 250, 246, 0.94)",
                   }}
                 >
-                  <Typography variant="overline" color="secondary.main">
-                    Arayuz Vitrini
-                  </Typography>
-                  <Typography variant="h4" sx={{ mt: 0.5, mb: 1 }}>
-                    Nazik tonlar, net bilgi hiyerarsisi
-                  </Typography>
+                  
+                  <Box sx={{ mb: 1.25, textAlign: { xs: "left", lg: "center" } }}>
+                    
+                    <Typography
+                      variant="h3"
+                      sx={{
+                        mt: 0.4,
+                        fontWeight: 700,
+                        lineHeight: 1.02,
+                        letterSpacing: "-0.03em",
+                        color: "primary.main",
+                      }}
+                    >
+                      Lina Güzellik Merkezi
+                    </Typography>
+                  </Box>
                   <Typography color="text.secondary">
-                    Beyaz, acik krem, rose gold ve koyu lacivert uyumuyla sakin ama
-                    iddiali bir kimlik.
+                    Lazer epilasyon, cilt bakımı, estetik uygulamalar, vücut şekillendirme ve saç uygulamaları için hizmet detaylarını görüntüleyebilir;
+                    size uygun tarih ve saatten randevu talebi oluşturabilirsiniz.
                   </Typography>
                 </Paper>
                 <Grid container spacing={2}>

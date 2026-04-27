@@ -1,15 +1,20 @@
+import aestheticApplicationsCategoryImage from "./aesthetic-applications-category.jpg";
 import aestheticApplicationsImage from "./aesthetic-applications.svg";
+import bodyShapingCategoryImage from "./body-shaping-category.jpg";
 import bodyShapingImage from "./body-shaping.svg";
+import hairApplicationsCategoryImage from "./hair-applications-category.jpg";
 import hairApplicationsImage from "./hair-applications.svg";
+import laserApplicationsCategoryImage from "./laser-applications-category.jpg";
 import laserApplicationsImage from "./laser-applications.svg";
+import skinCareTreatmentsCategoryImage from "./skin-care-treatments-category.jpg";
 import skinCareTreatmentsImage from "./skin-care-treatments.svg";
 
 export const categoryImageMap = {
-  "lazer-uygulamalari": laserApplicationsImage,
-  "estetik-uygulamalari": aestheticApplicationsImage,
-  "cilt-bakimi-ve-cilt-problemleri": skinCareTreatmentsImage,
-  "vucut-sekillendirme": bodyShapingImage,
-  "sac-uygulamalari": hairApplicationsImage,
+  "lazer-uygulamalari": laserApplicationsCategoryImage,
+  "estetik-uygulamalari": aestheticApplicationsCategoryImage,
+  "cilt-bakimi-ve-cilt-problemleri": skinCareTreatmentsCategoryImage,
+  "vucut-sekillendirme": bodyShapingCategoryImage,
+  "sac-uygulamalari": hairApplicationsCategoryImage,
 } as const;
 
 export const serviceImageMap = {
