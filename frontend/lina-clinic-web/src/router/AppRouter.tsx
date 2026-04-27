@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { AdminLayout } from "../components/layout/AdminLayout";
+import { AdminLayout } from "../components/admin/AdminLayout";
+import { ProtectedAdminRoute } from "../components/admin/ProtectedAdminRoute";
 import { PublicLayout } from "../components/layout/PublicLayout";
 import { AboutPage } from "../pages/AboutPage";
 import { AdminAppointmentsPage } from "../pages/AdminAppointmentsPage";
@@ -27,10 +28,13 @@ export function AppRouter() {
         </Route>
 
         <Route path="/admin/login" element={<AdminLoginPage />} />
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<Navigate to="/admin/dashboard" replace />} />
-          <Route path="dashboard" element={<AdminDashboardPage />} />
-          <Route path="randevular" element={<AdminAppointmentsPage />} />
+
+        <Route element={<ProtectedAdminRoute />}>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<Navigate to="/admin/dashboard" replace />} />
+            <Route path="dashboard" element={<AdminDashboardPage />} />
+            <Route path="randevular" element={<AdminAppointmentsPage />} />
+          </Route>
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

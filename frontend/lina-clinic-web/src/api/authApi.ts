@@ -1,4 +1,4 @@
-import { AUTH_TOKEN_STORAGE_KEY, apiClient, type ApiResponse } from "./client";
+import { apiClient, type ApiResponse } from "./client";
 import type { LoginRequest, LoginResponse } from "../types/auth";
 
 export const authApi = {
@@ -10,17 +10,4 @@ export const authApi = {
 
     return response.data.data;
   },
-
-  saveToken(token: string) {
-    window.localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, token);
-  },
-
-  getToken() {
-    return window.localStorage.getItem(AUTH_TOKEN_STORAGE_KEY);
-  },
-
-  clearToken() {
-    window.localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
-  },
 };
-

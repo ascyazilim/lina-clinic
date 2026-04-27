@@ -1,4 +1,5 @@
 import axios, { AxiosHeaders } from "axios";
+import { clearAuth, getToken } from "../types/auth";
 
 export interface ApiResponse<T> {
   success: boolean;
@@ -7,8 +8,6 @@ export interface ApiResponse<T> {
   errors?: unknown;
   timestamp: string;
 }
-
-export const AUTH_TOKEN_STORAGE_KEY = "lina-clinic-access-token";
 
 const configuredApiBaseUrl = import.meta.env.VITE_API_BASE_URL?.trim();
 const configuredProxyTarget = import.meta.env.VITE_API_PROXY_TARGET?.trim();
@@ -33,11 +32,7 @@ export const apiClient = axios.create({
 });
 
 apiClient.interceptors.request.use((config) => {
-  if (typeof window === "undefined") {
-    return config;
-  }
-
-  const token = window.localStorage.getItem(AUTH_TOKEN_STORAGE_KEY);
+  const token = getToken();
 
   if (token) {
     const headers = AxiosHeaders.from(config.headers);
@@ -47,6 +42,35 @@ apiClient.interceptors.request.use((config) => {
 
   return config;
 });
+
+apiClient.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (!axios.isAxiosError(error)) {
+      return Promise.reject(error);
+    }
+
+    const responseStatus = error.response?.status;
+    const requestUrl = error.config?.url ?? "";
+    const isLoginRequest = requestUrl.includes("/api/auth/login");
+    const isAdminRequest = requestUrl.includes("/api/admin/");
+
+    if (
+      responseStatus === 401 &&
+      !isLoginRequest &&
+      isAdminRequest &&
+      typeof window !== "undefined"
+    ) {
+      clearAuth();
+
+      if (window.location.pathname !== "/admin/login") {
+        window.location.replace("/admin/login");
+      }
+    }
+
+    return Promise.reject(error);
+  },
+);
 
 export function getApiErrorMessage(error: unknown, fallback = "Bir hata olustu.") {
   if (axios.isAxiosError<ApiResponse<unknown>>(error)) {
