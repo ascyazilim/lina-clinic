@@ -1,5 +1,6 @@
 import { apiClient, type ApiResponse } from "./client";
 import type {
+  AppointmentFormPayload,
   AppointmentCreateRequest,
   AppointmentCreatedResponse,
   AvailableSlot,
@@ -14,16 +15,29 @@ export const appointmentApi = {
       },
     );
 
-    return response.data.data ?? [];
+    return (response.data.data ?? []).map((slot) => ({
+      ...slot,
+      available: true,
+    }));
   },
 
-  async createAppointment(payload: AppointmentCreateRequest) {
+  async createAppointment(payload: AppointmentFormPayload) {
+    const requestPayload: AppointmentCreateRequest = {
+      firstName: payload.firstName,
+      lastName: payload.lastName,
+      phone: payload.phone,
+      serviceId: payload.serviceId,
+      date: payload.appointmentDate,
+      time: payload.startTime,
+      kvkkApproved: payload.kvkkApproved,
+      note: payload.note,
+    };
+
     const response = await apiClient.post<ApiResponse<AppointmentCreatedResponse>>(
       "/api/public/appointments",
-      payload,
+      requestPayload,
     );
 
     return response.data.data;
   },
 };
-

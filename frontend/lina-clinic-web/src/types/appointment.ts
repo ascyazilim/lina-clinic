@@ -8,6 +8,7 @@ export type AppointmentStatus =
 export interface AvailableSlot {
   date: string;
   time: string;
+  available: boolean;
 }
 
 export interface AppointmentCreateRequest {
@@ -17,6 +18,17 @@ export interface AppointmentCreateRequest {
   serviceId: number;
   date: string;
   time: string;
+  kvkkApproved: boolean;
+  note?: string;
+}
+
+export interface AppointmentFormPayload {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  serviceId: number;
+  appointmentDate: string;
+  startTime: string;
   kvkkApproved: boolean;
   note?: string;
 }
@@ -66,4 +78,3 @@ export interface AdminAppointmentFilters {
   serviceId?: number;
   staffId?: number;
 }
-

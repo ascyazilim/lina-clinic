@@ -10,6 +10,7 @@ interface ServiceMediaProps {
   image?: ServiceImage;
   aspectRatio?: string;
   minHeight?: number;
+  showOverlayText?: boolean;
   sx?: SxProps<Theme>;
 }
 
@@ -19,6 +20,7 @@ export function ServiceMedia({
   image,
   aspectRatio = "4 / 3",
   minHeight = 200,
+  showOverlayText = true,
   sx,
 }: ServiceMediaProps) {
   const [imageFailed, setImageFailed] = useState(false);
@@ -89,39 +91,40 @@ export function ServiceMedia({
         />
       ) : null}
 
-      <Stack
-        spacing={0.65}
-        sx={{
-          position: "absolute",
-          left: 20,
-          right: 20,
-          bottom: 18,
-          color: "common.white",
-        }}
-      >
-        {!shouldRenderImage ? (
-          <BrokenImageOutlinedIcon sx={{ fontSize: 18, opacity: 0.78 }} />
-        ) : null}
-        {subtitle ? (
-          <Typography
-            variant="caption"
-            sx={{ letterSpacing: "0.1em", textTransform: "uppercase", opacity: 0.82 }}
-          >
-            {subtitle}
-          </Typography>
-        ) : null}
-        <Typography
-          variant="h6"
+      {showOverlayText ? (
+        <Stack
+          spacing={0.65}
           sx={{
-            fontWeight: 700,
-            lineHeight: 1.15,
-            maxWidth: shouldRenderImage ? 420 : 380,
+            position: "absolute",
+            left: 20,
+            right: 20,
+            bottom: 18,
+            color: "common.white",
           }}
         >
-          {title}
-        </Typography>
-      </Stack>
+          {!shouldRenderImage ? (
+            <BrokenImageOutlinedIcon sx={{ fontSize: 18, opacity: 0.78 }} />
+          ) : null}
+          {subtitle ? (
+            <Typography
+              variant="caption"
+              sx={{ letterSpacing: "0.1em", textTransform: "uppercase", opacity: 0.82 }}
+            >
+              {subtitle}
+            </Typography>
+          ) : null}
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: 700,
+              lineHeight: 1.15,
+              maxWidth: shouldRenderImage ? 420 : 380,
+            }}
+          >
+            {title}
+          </Typography>
+        </Stack>
+      ) : null}
     </Box>
   );
 }
-

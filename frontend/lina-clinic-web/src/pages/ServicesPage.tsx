@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { Box, Container, Stack, Typography } from "@mui/material";
+import { useLocation } from "react-router-dom";
 import { ServiceCategorySection } from "../components/services/ServiceCategorySection";
 import {
   serviceCatalog,
@@ -6,6 +8,31 @@ import {
 } from "../components/services/serviceCatalog";
 
 export function ServicesPage() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.hash) {
+      return;
+    }
+
+    const targetId = decodeURIComponent(location.hash.replace(/^#/, ""));
+
+    const timeoutId = window.setTimeout(() => {
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 60);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [location.hash]);
+
   return (
     <Container maxWidth="xl" sx={{ py: { xs: 7, md: 10 } }}>
       <Box sx={{ mb: 5.5 }}>
